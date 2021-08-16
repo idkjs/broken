@@ -1,13 +1,11 @@
 (test
  (name unit_testing)
  (modules unit_testing)
- ; (modules (:standard))
  (libraries broken))
 
 (test
  (name testBroken)
- (modules testBroken)
- ; (modules (:standard))
+ (modules testBroken main)
  (libraries broken))
 
 (include_subdirs unqualified)

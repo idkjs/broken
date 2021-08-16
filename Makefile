@@ -16,16 +16,13 @@
 project_name = broken
 opam_file = $(project_name).opam
 DUNE = opam exec -- dune
-DOCKER_COMPOSE = docker compose -f docker-compose.dev.yml
 
-.PHONY: help
 help:
 	@echo "List of available make commands";
 	@echo "";
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}';
 	@echo "";
 
-.PHONY: lock
 lock: ## Generate a lock file
 	opam lock . -y
 
@@ -33,7 +30,9 @@ build: ## Build the app
 	$(DUNE) build @all
 
 watch: ## Build the app in watch mode
-	$(DUNE) build @all
+	$(DUNE) build @all -w
+test: ## Run the tests
+	$(DUNE) runtest
 
 clean:
 	@dune clean
@@ -42,7 +41,7 @@ clean:
 format: ## Format the code
 	dune build @fmt --auto-promote
 
-docs: clean build
+docs: clean build ## Build the documentation
 	@dune build @doc
 	mkdir -p doc.public
 	cp -r _build/default/_doc/_html doc.public
