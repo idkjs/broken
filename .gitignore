@@ -54,3 +54,5 @@ Wiki/
 # Local customization
 #
 Makefile.local
+_build
+doc.public

@@ -1,0 +1,9 @@
+(library
+ (name broken)
+ (public_name broken)
+ (libraries unix))
+
+(env
+ (dev
+  (flags
+   (:standard -w -27 -w -32))))
