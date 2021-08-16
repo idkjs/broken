@@ -31,6 +31,7 @@ build: ## Build the app
 
 watch: ## Build the app in watch mode
 	$(DUNE) build @all -w
+	
 test: ## Run the tests
 	$(DUNE) runtest
 
